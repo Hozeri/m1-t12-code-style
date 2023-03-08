@@ -1,9 +1,10 @@
 import java.util.Scanner;
 
 public class DepositCalculator {
+
     double calculateComplexPercent(double amount, double yearRate, int depositPeriod) {
-        double pay = amount * Math.pow((1 + yearRate / 12), 12 * depositPeriod);
-        return round(pay, 2);
+        double complexPercent = amount * Math.pow((1 + yearRate / 12), 12 * depositPeriod);
+        return round(complexPercent, 2);
     }
 
     double calculateSimplePercent(double amount, double yearRate, int depositPeriod) {
@@ -16,27 +17,24 @@ public class DepositCalculator {
     }
 
     void calculateDepositIncome() {
-        int amount;
-        int period;
+        int depositPeriod;
         int depositType;
-
+        int amount;
+        double income = 0;
         Scanner scanner = new Scanner(System.in);
-
+        
         System.out.println("Введите сумму вклада в рублях:");
         amount = scanner.nextInt();
         System.out.println("Введите срок вклада в годах:");
-        period = scanner.nextInt();
+        depositPeriod = scanner.nextInt();
         System.out.println("Выберите тип вклада, 1 - вклад с обычным процентом, 2 - вклад с капитализацией:");
         depositType = scanner.nextInt();
-
-        double income = 0;
-
         if (depositType == 1) {
-            income = calculateSimplePercent(amount, 0.06, period);
+            income = calculateSimplePercent(amount, 0.06, depositPeriod);
         } else if (depositType == 2) {
-            income = calculateComplexPercent(amount, 0.06, period);
+            income = calculateComplexPercent(amount, 0.06, depositPeriod);
         }
-        System.out.println("Результат вклада: " + amount + " за " + period + " лет превратятся в " + income);
+        System.out.println("Результат вклада: " + amount + " за " + depositPeriod + " лет превратятся в " + income);
     }
 
     public static void main(String[] args) {
